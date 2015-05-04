@@ -1,6 +1,8 @@
 var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
+var handler_module = require('./lib/handler');
+
 
 
 /*--------------- Express configuration goes here: -------------------*/
@@ -22,6 +24,8 @@ app.use(express.static(__dirname + '/public'));
 app.listen(port, host, function() {
   //configuration
 
+  handler = new handler_module.Handler();
+
   console.log("Server configured");
   console.log("Server listening to %s:%d", host, port);
 });
@@ -29,12 +33,48 @@ app.listen(port, host, function() {
 
 /*--------------- HTTP Calls -------------------*/
 
+
 var getDescriptions = function(req, res){
   res.sendStatus(200);
 }
 
 var getEntryPoint = function(req, res){
+  var d = new Date(1430730000*1000);
+
+  console.log(d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear());
+  console.log(d.getHours() + ':' + d.getMinutes() + ":" + d.getSeconds());
+
   res.send({success: false});
+}
+
+var getCurrentWeather = function(req, res){
+  if(req.query.hasOwnProperty('city')){
+    var city = req.query.city;
+    console.log("I have received the city: " + city);
+    res.send({success: false});
+  }
+  else{
+    var latitude = req.query.lat;
+    var longitude = req.query.lon;
+    console.log("lat: " + latitude + " - lon: " + longitude);
+    handler.CurrentWeather.getByCoordinates(latitude, longitude, function(data){
+      res.send(data);
+    });
+  }
+}
+
+var getForcastedWeather = function(req, res){
+  if(req.query.hasOwnProperty('city')){
+    var city = req.query.city;
+    console.log("I have received the city: " + city);
+    res.send({success: false});
+  }
+  else{
+    var latitude = req.query.lat;
+    var longitude = req.query.lon;
+    console.log("lat: " + latitude + " - lon: " + longitude);
+    res.send({success: true});
+  }
 }
 
 
@@ -44,4 +84,8 @@ var getEntryPoint = function(req, res){
 app.options(/^\/([\d\w\/]*)$/, getDescriptions);
 
 app.get("/", getEntryPoint);
+
+app.get("/weather", getCurrentWeather);
+
+app.get("/forecast", getForcastedWeather);
 
