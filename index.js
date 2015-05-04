@@ -39,11 +39,6 @@ var getDescriptions = function(req, res){
 }
 
 var getEntryPoint = function(req, res){
-  var d = new Date(1430730000*1000);
-
-  console.log(d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear());
-  console.log(d.getHours() + ':' + d.getMinutes() + ":" + d.getSeconds());
-
   res.send({success: false});
 }
 
@@ -51,6 +46,7 @@ var getCurrentWeather = function(req, res){
   if(req.query.hasOwnProperty('city')){
     var city = req.query.city;
     console.log("I have received the city: " + city);
+    //NOT IMPLEMENTED
     res.send({success: false});
   }
   else{
@@ -67,13 +63,16 @@ var getForcastedWeather = function(req, res){
   if(req.query.hasOwnProperty('city')){
     var city = req.query.city;
     console.log("I have received the city: " + city);
+    //NOT IMPLEMENTED
     res.send({success: false});
   }
   else{
     var latitude = req.query.lat;
     var longitude = req.query.lon;
     console.log("lat: " + latitude + " - lon: " + longitude);
-    res.send({success: true});
+    handler.ForecastWeather.getByCoordinates(latitude, longitude, function(data){
+      res.send(data);
+    });
   }
 }
 
