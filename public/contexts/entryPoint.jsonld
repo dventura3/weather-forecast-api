@@ -1,0 +1,17 @@
+{
+  "vocab": "http://www.example.org/weatherapi/vocab#",
+  "hydra": "http://www.w3.org/ns/hydra/core#",
+  "schema": "http://www.schema.org/",
+  "EntryPoint": "vocab:EntryPoint",
+  "IriTemplate" : "hydra:IriTemplate",
+  "IriTemplateMapping" : "hydra:IriTemplateMapping",
+  "template" : "hydra:template",
+  "mappings" : "hydra:mapping",
+  "variable" : "hydra:variable",
+  "property": {
+    "@id": "hydra:property",
+    "@type": "@id"
+  },
+  "weather": "vocab:EntryPoint_weather",
+  "forecast": "vocab:EntryPoint_forecast"
+}

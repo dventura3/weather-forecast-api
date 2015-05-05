@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/public'));
 app.listen(port, host, function() {
   //configuration
 
-  handler = new handler_module.Handler();
+  handler = new handler_module.Handler("http://" + host + ":" + port);
 
   console.log("Server configured");
   console.log("Server listening to %s:%d", host, port);
@@ -39,7 +39,9 @@ var getDescriptions = function(req, res){
 }
 
 var getEntryPoint = function(req, res){
-  res.send({success: false});
+  handler.EntryPoint.getEntryPoint(function(data){
+    res.send(data);
+  });
 }
 
 var getCurrentWeather = function(req, res){
