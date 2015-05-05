@@ -1,0 +1,33 @@
+{
+  "vocab": "http://www.example.org/weatherapi/vocab#",
+  "hydra": "http://www.w3.org/ns/hydra/core#",
+  "schema": "http://www.schema.org/",
+  "dbpedia": "http://dbpedia.org/resource/",
+  "iot-unit": "https://iotdb.org/pub/iot-unit#",
+  "CurrentWeather": "vocab:CurrentWeather",
+  "day": {
+    "@id" : "vocab:dayOfForecast",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+  },
+  "latitude" : "schema:latitude",
+  "longitude" : "schema:longitude",
+  "minTemperature" : "vocab:hasPredictedMinTemperature",
+  "maxTemperature" : "vocab:hasPredictedMaxTemperature",
+  "Temperature" : "dbpedia:Temperature",
+  "value": {
+    "@id": "vocab:hasValue",
+    "@type": "http://www.w3.org/2001/XMLSchema#double"
+  },
+  "unit": {
+    "@id": "iot:unit",
+    "@type": "@id"
+  },
+  "humidity" : "vocab:hasPredictedHumidity",
+  "Humidity" : "dbpedia:Humidity",
+  "lightIntensity" : "vocab:hasPredictedLightIntensity",
+  "Light": "dbpedia:Light",
+  "windSpeed" : "vocab:hasPredictedWindSpeed",
+  "Wind_speed" : "dbpedia:Wind_speed",
+  "rain" : "vocab:hasPredictedRain",
+  "Rain" : "dbpedia:Rain"
+}
