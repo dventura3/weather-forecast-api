@@ -7,6 +7,8 @@
 
 
 {
+	?wth a vocab:Weather.
+
   ?location a schema:GeoCoordinates;
           schema:latitude ?lat;
           schema:longitude ?lon.
@@ -14,10 +16,9 @@
 =>
 {
   _:request http:methodName "GET";
-      http:requestURI ("/weather/current?lat=" ?lat "&lon=" ?lon);
+      http:requestURI (?wth "?lat=" ?lat "&lon=" ?lon);
       http:resp [ http:body ?wth ].
 
-  ?wth a vocab:Weather;
-      vocab:relatedLocation ?location;
+  ?wth vocab:relatedLocation ?location;
       vocab:hasTimestamp ?timestamp.
 }.

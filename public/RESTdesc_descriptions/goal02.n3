@@ -6,7 +6,7 @@
 #GET current weather for a specific location
 
 {
-  ?listWeather a vocab:DailyForcastWeatherCollection;
+  ?listWeather a vocab:DailyForecastWeatherCollection;
               hydra:member ?prediction.
 
   ?prediction a vocab:Prediction;
@@ -18,5 +18,5 @@
 }
 =>
 {
-  ?listWeather a vocab:DailyForcastWeatherCollection.
+  ?listWeather a vocab:DailyForecastWeatherCollection.
 }.

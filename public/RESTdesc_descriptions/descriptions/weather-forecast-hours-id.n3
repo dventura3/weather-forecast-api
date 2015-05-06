@@ -7,6 +7,8 @@
 
 
 {
+  ?listWeather a vocab:HourlyForecastWeatherCollection.
+
   ?hours a owl-time:DurationDescription;
         owl-time:hours ?numHours.
 
@@ -17,12 +19,11 @@
 =>
 {
   _:request http:methodName "GET";
-      http:requestURI ("/weather/forecast/hours/" ?numHours "?lat=" ?lat "&lon=" ?lon);
+      http:requestURI (?listWeather "/" ?numHours "?lat=" ?lat "&lon=" ?lon);
       http:resp [ http:body ?listWeather ].
   
 
-  ?listWeather a vocab:HourlyForcastWeatherCollection;
-              hydra:member ?prediction.
+  ?listWeather hydra:member ?prediction.
 
   ?prediction a vocab:Prediction;
               vocab:willHappen ?data;
