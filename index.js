@@ -46,12 +46,9 @@ var getDescriptions = function(req, res){
                          .sort(function (a,b) { return b.length - a.length; });
 
     if(!fileNames.length){
-      /*
       handler.StatusCode.notFound(function(jsonld_data){
         res.send(jsonld_data);
       });
-      */
-      res.sendStatus(200);
       return -1;
     }
 
@@ -65,8 +62,8 @@ var getDescriptions = function(req, res){
 }
 
 var getEntryPoint = function(req, res){
-  handler.EntryPoint.getEntryPoint(function(data){
-    res.send(data);
+  handler.EntryPoint.getEntryPoint(function(jsonld_data){
+    res.send(jsonld_data);
   });
 }
 
@@ -74,32 +71,67 @@ var getCurrentWeather = function(req, res){
   if(req.query.hasOwnProperty('city')){
     var city = req.query.city;
     console.log("I have received the city: " + city);
-    //NOT IMPLEMENTED
-    res.send({success: false});
+    handler.StatusCode.notImplemented(function(jsonld_data){
+      res.send(jsonld_data);
+    });
   }
   else{
     var latitude = req.query.lat;
     var longitude = req.query.lon;
     console.log("lat: " + latitude + " - lon: " + longitude);
-    handler.CurrentWeather.getByCoordinates(latitude, longitude, function(data){
-      res.send(data);
+    handler.CurrentWeather.getByCoordinates(latitude, longitude, function(jsonld_data){
+      res.send(jsonld_data);
     });
   }
 }
 
-var getForcastedWeather = function(req, res){
+var getDailyForecastWeather = function(req, res){
+  var numberDays = req.params.days;
+
+  //MAX 1 WEEK!
+  if(numberDays > 7){
+    handler.StatusCode.notImplementedMoreThanOneWeek(function(jsonld_data){
+      res.send(jsonld_data);
+    });
+    return -1;
+  }
+
   if(req.query.hasOwnProperty('city')){
     var city = req.query.city;
     console.log("I have received the city: " + city);
-    //NOT IMPLEMENTED
-    res.send({success: false});
+    handler.StatusCode.notImplemented(function(jsonld_data){
+      res.send(jsonld_data);
+    });
   }
   else{
     var latitude = req.query.lat;
     var longitude = req.query.lon;
     console.log("lat: " + latitude + " - lon: " + longitude);
-    handler.ForecastWeather.getByCoordinates(latitude, longitude, function(data){
-      res.send(data);
+    handler.DailyForecastWeather.getByCoordinates(latitude, longitude, numberDays, function(jsonld_data){
+      res.send(jsonld_data);
+    });
+  }
+}
+
+var getHourlyForecastWeather = function(req, res){
+  var numberHours = req.params.hours;
+
+  //determine how many hours remain for today... numberHours can't be more!
+  //TODO
+
+  if(req.query.hasOwnProperty('city')){
+    var city = req.query.city;
+    console.log("I have received the city: " + city);
+    handler.StatusCode.notImplemented(function(jsonld_data){
+      res.send(jsonld_data);
+    });
+  }
+  else{
+    var latitude = req.query.lat;
+    var longitude = req.query.lon;
+    console.log("lat: " + latitude + " - lon: " + longitude);
+    handler.HourlyForecastWeather.getByCoordinates(latitude, longitude, numberHours, function(jsonld_data){
+      res.send(jsonld_data);
     });
   }
 }
@@ -139,7 +171,8 @@ app.options(/^\/([\d\w\/]*)$/, getDescriptions);
 
 app.get("/", getEntryPoint);
 
-app.get("/weather", getCurrentWeather);
+app.get("/weather/current", getCurrentWeather);
 
-app.get("/forecast", getForcastedWeather);
+app.get("/weather/forecast/days/:days", getDailyForecastWeather);
+app.get("/weather/forecast/hours/:hours", getHourlyForecastWeather);
 

@@ -2,6 +2,7 @@
   "vocab": "http://www.example.org/weatherapi/vocab#",
   "hydra": "http://www.w3.org/ns/hydra/core#",
   "schema": "http://www.schema.org/",
+  "owl-time": "http://www.w3.org/TR/owl-time",
   "EntryPoint": "vocab:EntryPoint",
   "IriTemplate" : "hydra:IriTemplate",
   "IriTemplateMapping" : "hydra:IriTemplateMapping",
@@ -13,5 +14,6 @@
     "@type": "@id"
   },
   "weather": "vocab:EntryPoint_weather",
-  "forecast": "vocab:EntryPoint_forecast"
+  "dailyForecast": "vocab:EntryPoint_dailyForecast",
+  "hourlyForecast" : "vocab:EntryPoint_hourlyForecast"
 }
