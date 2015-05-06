@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "vocab": "http://www.example.org/weatherapi/vocab#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "schema": "http://www.schema.org/",
+    "dbpedia": "http://dbpedia.org/resource/",
+    "iot": "https://iotdb.org/pub/iot#",
+    "iot-unit": "https://iotdb.org/pub/iot-unit#",
+    "willHappen": {
+      "@id": "vocab:willHappen",
+      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "latitude": "schema:latitude",
+    "longitude": "schema:longitude",
+    "temperature": "vocab:hasTemperature",
+    "Temperature": "dbpedia:Temperature",
+    "value": {
+      "@id": "vocab:hasValue",
+      "@type": "http://www.w3.org/2001/XMLSchema#double"
+    },
+    "unit": {
+      "@id": "iot:unit",
+      "@type": "@id"
+    },
+    "humidity": "vocab:hasHumidity",
+    "Humidity": "dbpedia:Humidity",
+    "lightIntensity": "vocab:hasLightIntensity",
+    "Light": "dbpedia:Light",
+    "windSpeed": "vocab:hasWindSpeed",
+    "Wind_speed": "dbpedia:Wind_speed",
+    "hasLocation" : "vocab:hasLocation",
+    "members" : {
+      "@id" : "vocab:hasMember",
+      "@container": "@set"
+    },
+    "GeoCoordinates" : "schema:GeoCoordinates",
+    "Prediction" : "vocab:Prediction",
+    "Weather" : "vocab:Weather"
+  },
+  "@id": "/forecast/days/3?lat=22&long=44",
+  "@type" : "vocab:DailyForcastWeatherCollection",
+  "members": [
+    {
+      "@id": "http://www.graph.org/forecast/day/1",
+      "@type" : "Prediction",
+      "willHappen" : "13-07-88",
+      "@graph": {
+        "@type": "Weather",
+        "hasLocation" : {
+          "@type" : "GeoCoordinates",
+          "latitude" : 22,
+          "longitude" : 44
+        },
+        "temperature": {
+          "@type": "Temperature",
+          "value": 20,
+          "unit": "iot-unit:temperature.si.celsius"
+        },
+        "humidity": {
+          "@type": "Humidity",
+          "value": 60
+        },
+        "lightIntensity": {
+          "@type": "Light",
+          "value": 35
+        }
+      }
+    }
+  ]
+}

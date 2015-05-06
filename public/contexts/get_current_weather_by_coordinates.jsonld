@@ -4,11 +4,13 @@
   "schema": "http://www.schema.org/",
   "dbpedia": "http://dbpedia.org/resource/",
   "iot-unit": "https://iotdb.org/pub/iot-unit#",
-  "CurrentWeather": "vocab:CurrentWeather",
+  "Weather": "vocab:Weather",
   "timestamp": {
     "@id" : "vocab:hasTimestamp",
     "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
   },
+  "GeoCoordinates" : "schema:GeoCoordinates",
+  "hasLocation" : "vocab:hasLocation",
   "latitude" : "schema:latitude",
   "longitude" : "schema:longitude",
   "temperature" : "vocab:hasTemperature",
