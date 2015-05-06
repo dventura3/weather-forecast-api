@@ -7,14 +7,14 @@
 #GET current weather for a specific location
 
 {
-	?location a schema:GeoCoordinates;
-					schema:latitude ?lat;
-					schema:longitude ?lon.
+  ?location a schema:GeoCoordinates;
+          schema:latitude ?lat;
+          schema:longitude ?lon.
 
-	?wth a vocab:Weather;
-			vocab:relatedLocation ?location.
+  ?wth a vocab:Weather;
+      vocab:relatedLocation ?location.
 }
 =>
 {
-	?wth a vocab:Weather;
+  ?wth a vocab:Weather;
 }.

@@ -35,7 +35,33 @@ app.listen(port, host, function() {
 
 
 var getDescriptions = function(req, res){
-  res.sendStatus(200);
+  var uriPattern = new RegExp(req.params[0].replace(/\//g, '-').replace(/\d+/g, 'id') + '.*');
+
+  fs.readdir(__dirname + "/public/RESTdesc_descriptions/descriptions" , function (err, fileNames) { 
+    if(err) throw err;
+
+    console.log(fileNames);
+
+    fileNames = fileNames.filter(function (file) { return file.match(uriPattern); })
+                         .sort(function (a,b) { return b.length - a.length; });
+
+    if(!fileNames.length){
+      /*
+      handler.StatusCode.notFound(function(jsonld_data){
+        res.send(jsonld_data);
+      });
+      */
+      res.sendStatus(200);
+      return -1;
+    }
+
+    readFiles(__dirname + "/public/RESTdesc_descriptions/descriptions", fileNames, function (files) {
+      console.log("Send RESTdesc descriptions");
+      res.header('Content-Type', 'text/n3');
+      res.send(joinN3Documents(files));
+    });
+
+  });
 }
 
 var getEntryPoint = function(req, res){
@@ -79,7 +105,34 @@ var getForcastedWeather = function(req, res){
 }
 
 
+/*--------------- Helpers Functions -------------------*/
+
+function readFiles(directory, fileNames, callback) {
+  var files = [];
+  fileNames.forEach(function (fileName) {
+    fs.readFile(directory + '/' + fileName, 'utf-8', function (err, data) {
+      files.push(data);
+      if(files.length == fileNames.length)
+        callback(files);
+    });
+  });
+}
+
+function joinN3Documents(documents) {
+  var namespaces = '', usedNamespaces = {}, triples = '',
+      match, prefixMatcher = /^@prefix.*\.$\n/gm;
+  documents.forEach(function (document) {
+    while((match = prefixMatcher.exec(document)) && (match = match[0]))
+      if(!usedNamespaces[match])
+        namespaces += (usedNamespaces[match] = match);
+    triples += document.replace(prefixMatcher, '');
+  });
+  return namespaces + triples;
+}
+
+
 /*--------------- Routes -------------------*/
+
 
 
 app.options(/^\/([\d\w\/]*)$/, getDescriptions);
