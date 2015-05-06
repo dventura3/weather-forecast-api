@@ -1,5 +1,5 @@
 #Processed by Id: euler.yap 7962 2015-04-16 09:59:02Z josd
-#eye --traditional --quick-answere --tactic transaction --query goal02.n3 preference.n3 descriptions/get_current.n3 descriptions/get_forecast.n3 inference/detailsWeather.n3 inference/inferenceInheritance.n3 inference/inferenceState.n3
+#eye --traditional --quick-answere --tactic transaction --query goal03.n3 preference.n3 descriptions/get_current.n3 descriptions/get_daily_forecast.n3 descriptions/get_hourly_forecast.n3 inference/detailsWeather.n3 inference/inferenceInheritance.n3 inference/inferenceState.n3
 
 @prefix vocab: <http://www.example.org/weatherapi/vocab#>.
 @prefix schema: <http://www.schema.org/>.
@@ -35,10 +35,10 @@
   r:rule <#lemma3>.
 
 <#lemma2> a r:Inference; r:gives {@forSome var:location_1. _:sk4 http:methodName "GET".
-  _:sk4 http:requestURI ("/forecast/days/" "2" "?lat=" "22" "&lon=" "44").
+  _:sk4 http:requestURI ("/forecast/hours/" "10" "?lat=" "22" "&lon=" "44").
   _:sk4 http:resp _:sk5.
   _:sk5 http:body _:sk6.
-  _:sk6 a vocab:DailyForcastWeatherCollection.
+  _:sk6 a vocab:HourlyForcastWeatherCollection.
   _:sk6 hydra:member _:sk7.
   _:sk7 a vocab:Prediction.
   _:sk7 vocab:willHappen _:sk8.
@@ -50,8 +50,8 @@
   <#lemma6>
   <#lemma7>
   <#lemma8>);
-  r:binding [ r:variable [ n3:uri "http://localhost/var#x0"]; r:boundTo [ a r:Existential; n3:nodeId "http://localhost/var#days_1"]];
-  r:binding [ r:variable [ n3:uri "http://localhost/var#x1"]; r:boundTo "2"];
+  r:binding [ r:variable [ n3:uri "http://localhost/var#x0"]; r:boundTo [ a r:Existential; n3:nodeId "http://localhost/var#hours_1"]];
+  r:binding [ r:variable [ n3:uri "http://localhost/var#x1"]; r:boundTo "10"];
   r:binding [ r:variable [ n3:uri "http://localhost/var#x2"]; r:boundTo [ a r:Existential; n3:nodeId "http://localhost/var#location_1"]];
   r:binding [ r:variable [ n3:uri "http://localhost/var#x3"]; r:boundTo "22"];
   r:binding [ r:variable [ n3:uri "http://localhost/var#x4"]; r:boundTo "44"];
@@ -63,19 +63,19 @@
   r:binding [ r:variable [ n3:uri "http://localhost/var#x10"]; r:boundTo [ a r:Existential; n3:nodeId "_:sk9"]];
   r:rule <#lemma9>.
 
-<#lemma3> a r:Extraction; r:gives {@forAll var:x0, var:x1, var:x2, var:x3, var:x4. {var:x0 a vocab:DailyForcastWeatherCollection.
+<#lemma3> a r:Extraction; r:gives {@forAll var:x0, var:x1, var:x2, var:x3, var:x4. {var:x0 a vocab:HourlyForcastWeatherCollection.
   var:x0 hydra:member var:x1.
   var:x1 a vocab:Prediction.
   var:x1 vocab:willHappen var:x2.
   var:x1 vocab:isRelated var:x3.
   var:x3 a vocab:Weather.
   var:x3 vocab:relatedLocation var:x4} => {var:x0 a vocab:DailyForcastWeatherCollection}};
-  r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/goal02.n3>].
+  r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/goal03.n3>].
 
-<#lemma4> a r:Extraction; r:gives {@forSome var:days_1. var:days_1 a <http://www.w3.org/TR/owl-timeDurationDescription>};
+<#lemma4> a r:Extraction; r:gives {@forSome var:hours_1. var:hours_1 a <http://www.w3.org/TR/owl-timeDurationDescription>};
   r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/preference.n3>].
 
-<#lemma5> a r:Extraction; r:gives {@forSome var:days_1. var:days_1 <http://www.w3.org/TR/owl-timedays> "2"};
+<#lemma5> a r:Extraction; r:gives {@forSome var:hours_1. var:hours_1 <http://www.w3.org/TR/owl-timehours> "10"};
   r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/preference.n3>].
 
 <#lemma6> a r:Extraction; r:gives {@forSome var:location_1. var:location_1 a <http://www.schema.org/GeoCoordinates>};
@@ -88,21 +88,21 @@
   r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/preference.n3>].
 
 <#lemma9> a r:Extraction; r:gives {@forAll var:x0, var:x1, var:x2, var:x3, var:x4. @forSome var:x5, var:x6, var:x7, var:x8, var:x9, var:x10. {var:x0 a <http://www.w3.org/TR/owl-timeDurationDescription>.
-  var:x0 <http://www.w3.org/TR/owl-timedays> var:x1.
+  var:x0 <http://www.w3.org/TR/owl-timehours> var:x1.
   var:x2 a <http://www.schema.org/GeoCoordinates>.
   var:x2 <http://www.schema.org/latitude> var:x3.
   var:x2 <http://www.schema.org/longitude> var:x4} => {var:x5 http:methodName "GET".
-  var:x5 http:requestURI ("/forecast/days/" var:x1 "?lat=" var:x3 "&lon=" var:x4).
+  var:x5 http:requestURI ("/forecast/hours/" var:x1 "?lat=" var:x3 "&lon=" var:x4).
   var:x5 http:resp var:x6.
   var:x6 http:body var:x7.
-  var:x7 a vocab:DailyForcastWeatherCollection.
+  var:x7 a vocab:HourlyForcastWeatherCollection.
   var:x7 hydra:member var:x8.
   var:x8 a vocab:Prediction.
   var:x8 vocab:willHappen var:x9.
   var:x8 vocab:isRelated var:x10.
   var:x10 a vocab:Weather.
   var:x10 vocab:relatedLocation var:x2}};
-  r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/descriptions/get_forecast.n3>].
+  r:because [ a r:Parsing; r:source <file:///Users/Daniela/Documents/Documenti_Dottorato/trasferte/Belgio_2015/work/implementation/weather-forecast-api/public/RESTdesc_descriptions/descriptions/get_hourly_forecast.n3>].
 
-#ENDS 0.061 [sec] TC=5 TP=14 BC=0 BP=0 PM=0 CM=0 FM=0 AM=0
+#ENDS 0.071 [sec] TC=5 TP=14 BC=0 BP=0 PM=0 CM=0 FM=0 AM=0
 

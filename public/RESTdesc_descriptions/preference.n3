@@ -6,5 +6,8 @@ _:location a schema:GeoCoordinates;
 					schema:latitude "22";
 					schema:longitude "44".
 
-_:days a owl-time:DurationDescription;
-				owl-time:days "2".
+#_:days a owl-time:DurationDescription;
+#				owl-time:days "2".
+
+_:hours a owl-time:DurationDescription;
+				owl-time:hours "10".
