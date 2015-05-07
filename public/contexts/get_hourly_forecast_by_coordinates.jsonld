@@ -6,12 +6,20 @@
   "iot": "https://iotdb.org/pub/iot#",
   "iot-unit": "https://iotdb.org/pub/iot-unit#",
   "HourlyForecastWeatherCollection" : "vocab:HourlyForecastWeatherCollection",
+  "Prediction" : "vocab:Prediction",
+  "Weather" : "vocab:Weather",
   "willHappen": {
     "@id": "vocab:willHappen",
     "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
   },
+  "GeoCoordinates" : "schema:GeoCoordinates",
+  "hasLocation" : "vocab:hasLocation",
   "latitude": "schema:latitude",
   "longitude": "schema:longitude",
+  "members" : {
+    "@id" : "vocab:hasMember",
+    "@container": "@set"
+  },
   "temperature": "vocab:hasTemperature",
   "Temperature": "dbpedia:Temperature",
   "value": {
@@ -28,12 +36,6 @@
   "Light": "dbpedia:Light",
   "windSpeed": "vocab:hasWindSpeed",
   "Wind_speed": "dbpedia:Wind_speed",
-  "hasLocation" : "vocab:hasLocation",
-  "members" : {
-    "@id" : "vocab:hasMember",
-    "@container": "@set"
-  },
-  "GeoCoordinates" : "schema:GeoCoordinates",
-  "Prediction" : "vocab:Prediction",
-  "Weather" : "vocab:Weather"
+  "rain" : "vocab:hasProbabilityRain",
+  "Rain" : "dbpedia:Rain"
 }

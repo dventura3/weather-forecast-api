@@ -89,7 +89,7 @@ var getDailyForecastWeather = function(req, res){
   var numberDays = req.params.days;
 
   //MAX 1 WEEK!
-  if(numberDays > 7){
+  if(numberDays > 8){
     handler.StatusCode.notImplementedMoreThanOneWeek(function(jsonld_data){
       res.send(jsonld_data);
     });
@@ -116,8 +116,13 @@ var getDailyForecastWeather = function(req, res){
 var getHourlyForecastWeather = function(req, res){
   var numberHours = req.params.hours;
 
-  //determine how many hours remain for today... numberHours can't be more!
-  //TODO
+  //Max number of hours == 10
+  if(numberHours > 10){
+    handler.StatusCode.notImplementedMoreThanTenHours(function(jsonld_data){
+      res.send(jsonld_data);
+    });
+    return -1;
+  }
 
   if(req.query.hasOwnProperty('city')){
     var city = req.query.city;
