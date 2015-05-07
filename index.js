@@ -40,8 +40,6 @@ var getDescriptions = function(req, res){
   fs.readdir(__dirname + "/public/RESTdesc_descriptions/descriptions" , function (err, fileNames) { 
     if(err) throw err;
 
-    console.log(fileNames);
-
     fileNames = fileNames.filter(function (file) { return file.match(uriPattern); })
                          .sort(function (a,b) { return b.length - a.length; });
 
@@ -57,7 +55,6 @@ var getDescriptions = function(req, res){
       res.header('Content-Type', 'text/n3');
       res.send(joinN3Documents(files));
     });
-
   });
 }
 

@@ -7,7 +7,7 @@
 
 
 {
-	?wth a vocab:Weather.
+  ?wth a vocab:Weather.
 
   ?location a schema:GeoCoordinates;
           schema:latitude ?lat;
