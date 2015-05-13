@@ -14,7 +14,7 @@ In particular, the server, during the configuration phase, checks if there is th
 
 ## Usage
 
-After having cloned the repository, you have to install the Node.js modules with `nmp install`.
+After having cloned the repository, you have to install the Node.js modules with `npm install`.
 Now you can run the server through `node index.js`. The default host is `127.0.0.1` and the default port is `3302`. You can change this configuration, setting the two environmental variables `HOST` and `PORT`.
 
 The following table summarises the RESTful services which are currently implemented. Each of them returns a JSON-LD response whose context is stored in `/public/contexts/` directory.
@@ -80,6 +80,6 @@ Connection: keep-alive
 ## Ontologies
 
 In order to describe the semantic contents, the ontology that I have used are:
-- vocab, that is a custom ontology to represents the concepts related to the current/forecast weather conditions;
-- [schema.org](http://schema.org), used for describing the Geo-coordiantes;
-- [owl-time](http://www.w3.org/TR/owl-time/), used for describing the concepts of days and hours.
+- vocab, that is a custom ontology to represents the lacking concepts;
+- [schema.org](http://schema.org);
+- [owl-time](http://www.w3.org/TR/owl-time/).
