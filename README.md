@@ -80,6 +80,6 @@ Connection: keep-alive
 ## Ontologies
 
 In order to describe the semantic contents, the ontology that I have used are:
-- vocab, that is a custom ontology to represents the lacking concepts;
+- vocab, that is a custom ontology for some lacking concepts;
 - [schema.org](http://schema.org);
 - [owl-time](http://www.w3.org/TR/owl-time/).
